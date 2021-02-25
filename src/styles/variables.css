@@ -1,0 +1,20 @@
+:root {
+  --color-first: #175676;
+  --color-first_transparent: #17567640;
+  --color-second: #4ba3c3;
+  --color-second_transparent: #4ba3c340;
+  --color-third: #cce6f4;
+  --color-third_transparent: #cce6f440;
+  --color-fourth: #ba324f;
+  --color-fourth_transparent: #ba324f40;
+  --color-fifth: #ebbab9;
+  --color-fifth_transparent: #ebbab940;
+  --color-sixth: #792d3d;
+  --color-sixth_transparent: #792d3d40;
+  --color-white: #f7f9f9;
+  --color-white_transparent: #f7f9f940;
+  --color-white_semitransparent: #f7f9f9c0;
+  --color-dark: #254441;
+  --color-dark_transparent: #25444140;
+  --font-family-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

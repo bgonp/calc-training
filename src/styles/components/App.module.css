@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  font-family: var(--font-family-main);
+}
+
+.solved {
+  background: var(--color-second_transparent);
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  
+  & div, & canvas {
+    width: 100%!important;
+    height: 100%!important;
+  }
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: right;
+  width: 12vh;
+}
+
+.number {
+  padding: 0.5vh;
+  color: var(--color-dark);
+  font-size: 5vh;
+  font-weight: 500;
+}
+
+.solved .number {
+  color: var(--color-first);
+}
+
+.button {
+  background: var(--color-second);
+  color: var(--color-white);
+  width: 100%;
+  padding: 3vh;
+  font-size: 5vh;
+  font-weight: 500;
+  letter-spacing: 1vh;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.solved .button {
+  background: var(--color-first);
+}
