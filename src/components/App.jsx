@@ -31,7 +31,7 @@ const App = () => {
                 hideInterface
                 hideGrid
                 backgroundColor='#0000'
-                brushColor='#ba324fb0'
+                brushColor='#ba324f'
                 brushRadius={6}
               />
             </div>
