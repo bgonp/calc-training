@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react'
+import CanvasDraw from 'react-canvas-draw'
 
-import Number from '@components/Number'
-import Solve from '@components/Solve'
 import useRandomNumbers from '@hooks/useRandomNumbers'
+
+import styles from '@styles/components/App.module.css'
 
 const App = () => {
   const [solved, setSolved] = useState(false)
@@ -16,17 +17,35 @@ const App = () => {
     nextNumbers()
   }
 
-  console.log(numbers)
+  const className = `${styles.container} ${solved ? styles.solved : ''}`
 
   return (
-    <div>
-      {numbers.map((number, index) => (
-        <Number key={index} value={number} />
-      ))}
-      <hr />
-      {solved ? <Number value={result} /> : <Solve onClick={onSolve} />}
-      {solved && <button onClick={onNext}>NEXT</button>}
-    </div>
+    <main className={className}>
+      <div className={styles.content}>
+        {
+          solved ||
+            <div className={styles.canvas}>
+              <CanvasDraw
+                hideInterface
+                hideGrid
+                backgroundColor='#0000'
+                brushColor='#ba324fb0'
+                brushRadius={6}
+              />
+            </div>
+        }
+        <div className={styles.numbers}>
+          {numbers.map((number, index) => (
+            <div className={styles.number} key={index}>{number}</div>
+          ))}
+        </div>
+      </div>
+      {
+        solved
+          ? <button className={styles.button} onClick={onNext}>{result}</button>
+          : <button className={styles.button} onClick={onSolve}>SOLVE</button>
+      }
+    </main>
   )
 }
 
