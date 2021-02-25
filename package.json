@@ -1,0 +1,20 @@
+{
+  "name": "calc-training",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "antd": "4.12.3",
+    "react": "17.0.0",
+    "react-dom": "17.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-refresh": "1.1.0",
+    "postcss-preset-env": "6.7.0",
+    "standard": "16.0.3",
+    "vite": "2.0.1"
+  }
+}
