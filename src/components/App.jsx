@@ -19,8 +19,10 @@ const App = () => {
 
   const className = `${styles.container} ${solved ? styles.solved : ''}`
 
+  const style = { height: window.innerHeight }
+
   return (
-    <main className={className}>
+    <main className={className} style={style}>
       <div className={styles.content}>
         {
           solved ||
