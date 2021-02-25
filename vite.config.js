@@ -4,7 +4,12 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 const path = require('path')
 
 export default defineConfig({
-  plugins: [reactRefresh()],
+  esbuild: {
+    jsxInject: "import React from 'react'"
+  },
+  plugins: [
+    reactRefresh()
+  ],
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
