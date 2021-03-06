@@ -63,6 +63,7 @@ const Drawable: FC<Props> = ({ addPoint, finishLine }) => {
       onMouseDown={onStartDrawing}
       onMouseMove={onMoveDrawing}
       onMouseUp={onEndDrawing}
+      onMouseLeave={onEndDrawing}
       onTouchStart={onStartDrawing}
       onTouchMove={onMoveDrawing}
       onTouchEnd={onEndDrawing}
