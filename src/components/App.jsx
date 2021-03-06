@@ -1,11 +1,12 @@
-import { useState, useMemo } from 'react'
-import CanvasDraw from 'react-canvas-draw'
+import { useState, useMemo, useLayoutEffect } from 'react'
+import DrawZone from './DrawZone'
 
 import useRandomNumbers from '@hooks/useRandomNumbers'
 
 import styles from '@styles/components/App.module.css'
 
 const App = () => {
+  const [height, setHeight] = useState(() => window.innerHeight)
   const [solved, setSolved] = useState(false)
   const [numbers, nextNumbers] = useRandomNumbers()
 
@@ -19,22 +20,18 @@ const App = () => {
 
   const className = `${styles.container} ${solved ? styles.solved : ''}`
 
-  const style = { height: window.innerHeight }
+  useLayoutEffect(() => {
+    const setNewHeight = () => setHeight(window.innerHeight)
+    window.addEventListener('resize', setNewHeight)
+    return () => window.removeEventListener('resize', setNewHeight)
+  }, [])
 
   return (
-    <main className={className} style={style}>
+    <main className={className} style={{ height }}>
       <div className={styles.content}>
         {
           solved ||
-            <div className={styles.canvas}>
-              <CanvasDraw
-                hideInterface
-                hideGrid
-                backgroundColor='#0000'
-                brushColor='#ba324f'
-                brushRadius={6}
-              />
-            </div>
+            <DrawZone className={styles.canvas} thickness={10} color='red' />
         }
         <div className={styles.numbers}>
           {numbers.map((number, index) => (
