@@ -1,5 +1,5 @@
 import { useState, useMemo, useLayoutEffect } from 'react'
-import DrawZone from './DrawZone'
+import { DrawProvider } from 'react-drawarea'
 
 import useRandomNumbers from '@hooks/useRandomNumbers'
 
@@ -31,7 +31,7 @@ const App = () => {
       <div className={styles.content}>
         {
           solved ||
-            <DrawZone className={styles.canvas} thickness={10} color='#ba324f' />
+            <DrawProvider className={styles.canvas} thickness={10} color='#ba324f' />
         }
         <div className={styles.numbers}>
           {numbers.map((number, index) => (
