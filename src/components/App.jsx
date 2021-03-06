@@ -31,7 +31,7 @@ const App = () => {
       <div className={styles.content}>
         {
           solved ||
-            <DrawZone className={styles.canvas} thickness={10} color='red' />
+            <DrawZone className={styles.canvas} thickness={10} color='#ba324f' />
         }
         <div className={styles.numbers}>
           {numbers.map((number, index) => (
