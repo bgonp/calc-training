@@ -1,2 +1,11 @@
 @import 'normalize';
 @import 'variables';
+
+body {
+  margin: 0;
+  overscroll-behavior: contain;
+}
+
+* {
+  user-select: none
+}
