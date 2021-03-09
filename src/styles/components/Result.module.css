@@ -1,0 +1,15 @@
+.result {
+  background: var(--color-white);
+  width: 30vh;
+  height: 30vh;
+  font-size: 9vh;
+  font-weight: 500;
+  line-height: 30vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -15vh;
+  border-radius: 50%;
+  text-align: center;
+  z-index: 1;
+}

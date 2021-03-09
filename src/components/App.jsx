@@ -1,6 +1,9 @@
 import { useState, useMemo, useLayoutEffect } from 'react'
-import { DrawProvider } from 'react-drawarea'
+import { DrawArea } from 'react-drawarea'
 
+import Buttons from '@components/Buttons'
+import Numbers from '@components/Numbers'
+import Result from '@components/Result'
 import useRandomNumbers from '@hooks/useRandomNumbers'
 
 import styles from '@styles/components/App.module.css'
@@ -12,8 +15,8 @@ const App = () => {
 
   const result = useMemo(() => numbers.reduce((a, b) => a + b, 0), [numbers])
 
-  const onSolve = () => setSolved(true)
-  const onNext = () => {
+  const handleSolve = () => setSolved(true)
+  const handleRestart = () => {
     setSolved(false)
     nextNumbers()
   }
@@ -28,22 +31,11 @@ const App = () => {
 
   return (
     <main className={className} style={{ height }}>
-      <div className={styles.content}>
-        {
-          solved ||
-            <DrawProvider className={styles.canvas} thickness={10} color='#ba324f' />
-        }
-        <div className={styles.numbers}>
-          {numbers.map((number, index) => (
-            <div className={styles.number} key={index}>{number}</div>
-          ))}
-        </div>
-      </div>
-      {
-        solved
-          ? <button className={styles.button} onClick={onNext}>{result}</button>
-          : <button className={styles.button} onClick={onSolve}>SOLVE</button>
-      }
+      <DrawArea className={styles.canvas} thickness={10} color='#ba324f' disabled={solved}>
+        {solved && <Result value={result} />}
+        <Numbers numbers={numbers} />
+        <Buttons solved={solved} handleRestart={handleRestart} handleSolve={handleSolve} />
+      </DrawArea>
     </main>
   )
 }

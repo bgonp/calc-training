@@ -1,0 +1,21 @@
+.container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: right;
+  width: 12vh;
+}
+
+.number {
+  padding: 0.5vh;
+  color: var(--color-dark);
+  font-size: 5vh;
+  font-weight: 500;
+}
