@@ -6,7 +6,7 @@
 }
 
 .solved {
-  background: var(--color-second_transparent);
+  background: var(--color-third);
 }
 
 .canvas {
