@@ -4,6 +4,17 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 const path = require('path')
 
 export default defineConfig({
+  css: {
+    modules: {
+      generateScopedName: function (name, filename) {
+        const path = require('path')
+        const file = path.basename(filename, '.module.css')
+        const hash = Math.random().toString(36).slice(2, 8)
+
+        return `${file}__${name}--${hash}`
+      }
+    }
+  },
   esbuild: {
     jsxInject: "import React from 'react'"
   },
