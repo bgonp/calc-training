@@ -1,12 +1,6 @@
-.buttons {
-  display: flex;
-  z-index: 1
-}
-
-.restart,
-.solve,
-.undo {
-  color: var(--color-white);
+.button {
+  color: var(--color-first);
+  background: var(--color-white);
   padding: 0 4vh;
   font-size: 5vh;
   font-weight: 500;
@@ -20,16 +14,16 @@
   height: 11vh;
 }
 
-.restart {
-  background: var(--color-first);
+.grow {
   flex-grow: 1;
 }
 
-.solve {
+.primary {
+  color: var(--color-white);
+  background: var(--color-first);
+}
+
+.secondary {
+  color: var(--color-white);
   background: var(--color-second);
-  flex-grow: 1;
-}
-
-.undo {
-  background: var(--color-first);
 }
