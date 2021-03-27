@@ -1,5 +1,6 @@
+import { createContext, useCallback, useContext } from 'react'
 import firebase from 'firebase'
-import { useCallback } from 'react'
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
@@ -15,7 +16,17 @@ firebase.initializeApp({
 const auth = firebase.auth()
 const firestore = firebase.firestore()
 
-const useFirebase = () => {
+const FirebaseContext = createContext(null)
+
+export const useFirebaseContext = () => {
+  const context = useContext(FirebaseContext)
+  if (!context) throw Error('Cannot use context outside provider')
+  const { user, signIn, signOut } = context
+
+  return { user, signIn, signOut }
+}
+
+export const FirebaseProvider = ({ children }) => {
   const [user] = useAuthState(auth)
 
   const signIn = useCallback(() => {
@@ -25,11 +36,9 @@ const useFirebase = () => {
 
   const signOut = useCallback(() => auth.signOut(), [])
 
-  return {
-    user,
-    signIn,
-    signOut
-  }
+  return (
+    <FirebaseContext.Provider value={{ user, signIn, signOut }}>
+      {children}
+    </FirebaseContext.Provider>
+  )
 }
-
-export default useFirebase
