@@ -11,12 +11,11 @@ const getNextNumbers = () => [...Array(randomNumber(quantity))].map(() => genera
 const useRandomNumbers = () => {
   const [numbers, setNumbers] = useState(getNextNumbers)
 
-  const next = useCallback(
-    () => setNumbers(getNextNumbers()),
-    []
-  )
+  const nextNumbers = useCallback(() => {
+    setNumbers(getNextNumbers())
+  }, [])
 
-  return [numbers, next]
+  return [numbers, nextNumbers]
 }
 
 export default useRandomNumbers
