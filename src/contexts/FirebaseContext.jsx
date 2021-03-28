@@ -21,7 +21,7 @@ const FirebaseContext = createContext(null)
 
 export const useFirebaseContext = () => {
   const context = useContext(FirebaseContext)
-  if (!context) throw Error('Cannot use context outside provider')
+  if (!context) throw Error('Cannot use context outside of provider')
 
   return context
 }
@@ -46,7 +46,9 @@ export const FirebaseProvider = ({ children }) => {
 
   const setEnd = () => {
     if (!user || !attempt.id) return
-    attempts.doc(attempt.id).update({ end: new Date() })
+    const end = new Date()
+    attempts.doc(attempt.id).update({ end })
+    setAttempt({ ...attempt, end })
   }
 
   const setSuccess = (success) => {
@@ -55,14 +57,14 @@ export const FirebaseProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const { id: attemptId, numbers, start } = attempt
+    const { id: attemptId, ...attemptData } = attempt
+
     if (!user && attemptId) {
-      setAttempt({ numbers, start })
-    } else if (user && !attemptId) {
-      const updatedAttempt = { numbers, start, uid: user.uid }
+      setAttempt(attemptData)
+    } else if (user && !attemptId && !attempt.end) {
       attempts
-        .add(updatedAttempt)
-        .then(({ id }) => setAttempt({ ...updatedAttempt, id }))
+        .add({ ...attemptData, uid: user.uid })
+        .then(({ id }) => setAttempt({ ...attemptData, id }))
     }
   }, [user, attempt])
 
