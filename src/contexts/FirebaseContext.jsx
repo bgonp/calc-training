@@ -54,11 +54,14 @@ export const FirebaseProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    if (user && attempt && !attempt.id) {
-      const updatedAttempt = { ...attempt, uid: user.uid }
-      attempts.add(updatedAttempt).then(({ id }) => {
-        setAttempt({ ...updatedAttempt, id })
-      })
+    const { id: attemptId, numbers, start } = attempt
+    if (!user && attemptId) {
+      setAttempt({ numbers, start })
+    } else if (user && !attemptId) {
+      const updatedAttempt = { numbers, start, uid: user.uid }
+      attempts
+        .add(updatedAttempt)
+        .then(({ id }) => setAttempt({ ...updatedAttempt, id }))
     }
   }, [user, attempt])
 
