@@ -1,0 +1,32 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.content {
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background: var(--color-transparent);
+  color: var(--color-first);
+  display: flex;
+  font-family: var(--font-family-main);
+  font-size: 5vh;
+  font-weight: 500;
+  justify-content: center;
+  padding: 4vh;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.buttons {
+  display: flex;
+}
+
+.content {
+  flex-grow: 1;
+}
