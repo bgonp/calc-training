@@ -1,8 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
+
+import { normalizeAttempts } from '@utils/normalizeAttempts'
 
 firebase.initializeApp({
   apiKey: import.meta.env.VITE_FB_API_KEY,
@@ -15,7 +17,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth()
 const firestore = firebase.firestore()
-const attempts = firestore.collection('attempts')
+const attemptsRef = firestore.collection('attempts')
 
 const FirebaseContext = createContext(null)
 
@@ -30,48 +32,47 @@ export const FirebaseProvider = ({ children }) => {
   const [user] = useAuthState(auth)
   const [attempt, setAttempt] = useState({})
 
+  const getAttempts = useCallback(
+    async () => {
+      if (!user) return {}
+      const snapshot = await attemptsRef.where('uid', '==', user.uid).get()
+      return normalizeAttempts(snapshot)
+    },
+    [user]
+  )
+
   const signIn = useCallback(() => {
     const provider = new firebase.auth.GoogleAuthProvider()
     auth.signInWithPopup(provider)
-  })
+  }, [])
 
   const signOut = useCallback(() => auth.signOut(), [])
 
-  const setStart = async (numbers) => {
-    setAttempt({
-      numbers,
-      start: new Date()
-    })
-  }
+  const setStart = useCallback((numbers) => {
+    const start = firebase.firestore.FieldValue.serverTimestamp()
+    setAttempt({ numbers, start })
+  }, [])
 
-  const setEnd = () => {
+  const setEnd = useCallback(() => {
+    if (!user) return
+    const { uid } = user
+    const end = firebase.firestore.FieldValue.serverTimestamp()
+    const updatedAttempt = { ...attempt, end, uid }
+    attemptsRef
+      .add(updatedAttempt)
+      .then(({ id }) => setAttempt({ ...updatedAttempt, id }))
+  }, [attempt, user])
+
+  const setSuccess = useCallback(success => {
     if (!user || !attempt.id) return
-    const end = new Date()
-    attempts.doc(attempt.id).update({ end })
-    setAttempt({ ...attempt, end })
-  }
-
-  const setSuccess = (success) => {
-    if (!user || !attempt.id) return
-    attempts.doc(attempt.id).update({ success })
-  }
-
-  useEffect(() => {
-    const { id: attemptId, ...attemptData } = attempt
-
-    if (!user && attemptId) {
-      setAttempt(attemptData)
-    } else if (user && !attemptId && !attempt.end) {
-      attempts
-        .add({ ...attemptData, uid: user.uid })
-        .then(({ id }) => setAttempt({ ...attemptData, id }))
-    }
-  }, [user, attempt])
+    attemptsRef.doc(attempt.id).update({ success })
+  }, [attempt, user])
 
   return (
     <FirebaseContext.Provider
       value={{
         user,
+        getAttempts,
         signIn,
         signOut,
         setStart,
