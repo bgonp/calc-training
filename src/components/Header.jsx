@@ -1,9 +1,5 @@
-import { useState } from 'react'
-
 import Button from '@components/Button'
-import LogInIcon from '@components/LogInIcon'
-import LogOutIcon from '@components/LogOutIcon'
-import Modal from '@components/Modal'
+import { LogInIcon, LogOutIcon } from '@components/icons'
 import { useFirebaseContext } from '@contexts/FirebaseContext'
 import { useModal } from '@contexts/ModalContext'
 
@@ -14,6 +10,10 @@ const Header = () => {
   const { renderModal } = useModal()
 
   const handleSignOut = () => renderModal('Do you want to sign out?', signOut)
+  // TODO
+  // const handleSignOut = () => getAttempts().then(
+  //   data => renderModal(JSON.stringify(data, null, 2), signOut)
+  // )
 
   return (
     <header className={styles.header}>

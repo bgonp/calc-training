@@ -18,6 +18,7 @@ firebase.initializeApp({
 const auth = firebase.auth()
 const firestore = firebase.firestore()
 const attemptsRef = firestore.collection('attempts')
+const { serverTimestamp } = firebase.firestore.FieldValue
 
 const FirebaseContext = createContext(null)
 
@@ -49,14 +50,14 @@ export const FirebaseProvider = ({ children }) => {
   const signOut = useCallback(() => auth.signOut(), [])
 
   const setStart = useCallback((numbers) => {
-    const start = firebase.firestore.FieldValue.serverTimestamp()
+    const start = serverTimestamp()
     setAttempt({ numbers, start })
   }, [])
 
   const setEnd = useCallback(() => {
     if (!user) return
     const { uid } = user
-    const end = firebase.firestore.FieldValue.serverTimestamp()
+    const end = serverTimestamp()
     const updatedAttempt = { ...attempt, end, uid }
     attemptsRef
       .add(updatedAttempt)

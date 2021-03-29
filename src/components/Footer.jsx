@@ -2,10 +2,7 @@ import { useContext, useState } from 'react'
 import { DrawContext } from 'react-drawarea'
 
 import Button from '@components/Button'
-import CloseIcon from '@components/CloseIcon'
-import RestartIcon from '@components/RestartIcon'
-import TickIcon from '@components/TickIcon'
-import UndoIcon from '@components/UndoIcon'
+import { CloseIcon, RestartIcon, TickIcon, UndoIcon } from '@components/icons'
 import { useFirebaseContext } from '@contexts/FirebaseContext'
 
 import styles from '@styles/components/Footer.module.css'

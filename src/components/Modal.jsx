@@ -1,7 +1,6 @@
 
 import Button from '@components/Button'
-import CloseIcon from '@components/CloseIcon'
-import TickIcon from '@components/TickIcon'
+import { CloseIcon, TickIcon } from '@components/icons'
 import useHeight from '@hooks/useHeight'
 
 import styles from '@styles/components/Modal.module.css'

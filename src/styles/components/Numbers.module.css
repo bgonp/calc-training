@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.solved {
+  background: var(--color-third);
+}
+
 .numbers {
   display: grid;
   grid-template-columns: 1fr;

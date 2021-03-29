@@ -1,28 +1,20 @@
-import { DrawArea } from 'react-drawarea'
-
-import Footer from '@components/Footer'
-import Header from '@components/Header'
-import Numbers from '@components/Numbers'
-import Result from '@components/Result'
-import useCalc from '@hooks/useCalc'
+import Router from '@components/Router'
+import { FirebaseProvider } from '@contexts/FirebaseContext'
+import { ModalProvider } from '@contexts/ModalContext'
 import useHeight from '@hooks/useHeight'
 
 import styles from '@styles/components/App.module.css'
 
 const App = () => {
   const height = useHeight()
-  const { numbers, solved, result, solve, restart } = useCalc()
-
-  const className = `${styles.container} ${solved ? styles.solved : ''}`
 
   return (
-    <div className={className} style={{ height }}>
-      <Header />
-      <DrawArea className={styles.canvas} thickness={10} color='#ba324f' disabled={solved}>
-        {solved && <Result value={result} />}
-        <Numbers numbers={numbers} />
-        <Footer solved={solved} handleRestart={restart} handleSolve={solve} />
-      </DrawArea>
+    <div className={styles.container} style={{ height }}>
+      <ModalProvider>
+        <FirebaseProvider>
+          <Router />
+        </FirebaseProvider>
+      </ModalProvider>
     </div>
   )
 }

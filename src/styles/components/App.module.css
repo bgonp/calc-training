@@ -4,19 +4,3 @@
   flex-direction: column;
   font-family: var(--font-family-main);
 }
-
-.solved {
-  background: var(--color-third);
-}
-
-.canvas {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.solved .button {
-  background: var(--color-first);
-}
