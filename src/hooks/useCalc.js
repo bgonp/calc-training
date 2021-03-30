@@ -1,25 +1,27 @@
 import { useCallback, useState, useMemo, useEffect } from 'react'
 
-import { useFirebaseContext } from '@contexts/FirebaseContext'
+import { useFirebase } from '@contexts/FirebaseContext'
 import useRandomNumbers from '@hooks/useRandomNumbers'
 
 const useCalc = () => {
   const [solved, setSolved] = useState(false)
   const [numbers, nextNumbers] = useRandomNumbers()
-  const { setStart, setEnd } = useFirebaseContext()
+  const { start, store } = useFirebase()
 
-  const result = useMemo(() => numbers.reduce((a, b) => a + b, 0), [numbers])
+  const result = useMemo(() => numbers.reduce((a, b) => a + b), [numbers])
 
-  const solve = useCallback(() => setSolved(true), [])
+  const solve = useCallback(() => {
+    setSolved(true)
+    store(numbers)
+  }, [numbers, store])
+
   const restart = useCallback(() => {
     setSolved(false)
     nextNumbers()
-  }, [])
+    start()
+  }, [nextNumbers, start])
 
-  useEffect(() => {
-    if (solved) setEnd()
-    else setStart(numbers)
-  }, [solved])
+  useEffect(start, [start])
 
   return {
     numbers,
