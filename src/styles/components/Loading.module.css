@@ -1,0 +1,30 @@
+.container {
+  bottom: 0;
+  display: flex;
+  left: 0;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.container:not(.small) {
+  backdrop-filter: blur(6px);
+  background: var(--color-transparent);
+}
+
+.spinner {
+  animation: var(--animation-spin);
+  height: 15vh;
+  width: 15vh;
+  border-radius: 50%;
+  border: 0.8vh solid var(--color-third);
+  border-top-color: var(--color-second);
+}
+
+.small .spinner {
+  height: 5vh;
+  width: 5vh;
+}
