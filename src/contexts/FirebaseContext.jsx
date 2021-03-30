@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -18,11 +18,10 @@ firebase.initializeApp({
 const auth = firebase.auth()
 const firestore = firebase.firestore()
 const attemptsRef = firestore.collection('attempts')
-const { serverTimestamp } = firebase.firestore.FieldValue
 
 const FirebaseContext = createContext(null)
 
-export const useFirebaseContext = () => {
+export const useFirebase = () => {
   const context = useContext(FirebaseContext)
   if (!context) throw Error('Cannot use context outside of provider')
 
@@ -31,13 +30,19 @@ export const useFirebaseContext = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [user] = useAuthState(auth)
-  const [attempt, setAttempt] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const [startTime, setStartTime] = useState(null)
+  const [attemptId, setAttemptId] = useState(null)
 
   const getAttempts = useCallback(
-    async () => {
+    async (initDate, finishDate) => {
       if (!user) return {}
-      const snapshot = await attemptsRef.where('uid', '==', user.uid).get()
-      return normalizeAttempts(snapshot)
+      return normalizeAttempts(await attemptsRef
+        .where('uid', '==', user.uid)
+        .where('end', '>=', initDate)
+        .where('end', '<=', finishDate)
+        .get()
+      )
     },
     [user]
   )
@@ -49,36 +54,43 @@ export const FirebaseProvider = ({ children }) => {
 
   const signOut = useCallback(() => auth.signOut(), [])
 
-  const setStart = useCallback((numbers) => {
-    const start = serverTimestamp()
-    setAttempt({ numbers, start })
+  const setSuccess = useCallback(success => {
+    if (!user || !attemptId) return
+    attemptsRef.doc(attemptId).update({ success })
+  }, [attemptId, user])
+
+  const start = useCallback(() => {
+    setStartTime(new Date())
+    setAttemptId(null)
   }, [])
 
-  const setEnd = useCallback(() => {
+  const store = useCallback((numbers) => {
     if (!user) return
-    const { uid } = user
-    const end = serverTimestamp()
-    const updatedAttempt = { ...attempt, end, uid }
-    attemptsRef
-      .add(updatedAttempt)
-      .then(({ id }) => setAttempt({ ...updatedAttempt, id }))
-  }, [attempt, user])
+    const attempt = {
+      start: startTime,
+      end: new Date(),
+      uid: user.uid,
+      numbers
+    }
+    attemptsRef.add(attempt).then(({ id }) => setAttemptId(id))
+  }, [startTime, user])
 
-  const setSuccess = useCallback(success => {
-    if (!user || !attempt.id) return
-    attemptsRef.doc(attempt.id).update({ success })
-  }, [attempt, user])
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(() => setIsLoading(false))
+    return unsubscribe
+  })
 
   return (
     <FirebaseContext.Provider
       value={{
         user,
+        isLoading,
         getAttempts,
         signIn,
         signOut,
-        setStart,
-        setEnd,
-        setSuccess
+        setSuccess,
+        start,
+        store
       }}
     >
       {children}

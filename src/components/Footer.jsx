@@ -3,14 +3,14 @@ import { DrawContext } from 'react-drawarea'
 
 import Button from '@components/Button'
 import { CloseIcon, RestartIcon, TickIcon, UndoIcon } from '@components/icons'
-import { useFirebaseContext } from '@contexts/FirebaseContext'
+import { useFirebase } from '@contexts/FirebaseContext'
 
 import styles from '@styles/components/Footer.module.css'
 
 const Footer = ({ solved, handleRestart, handleSolve }) => {
   const [answered, setAnswered] = useState(false)
   const { undo, reset } = useContext(DrawContext)
-  const { setSuccess } = useFirebaseContext()
+  const { setSuccess } = useFirebase()
 
   const onRestart = () => {
     setAnswered(false)
