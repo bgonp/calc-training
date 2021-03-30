@@ -2,13 +2,16 @@ import styles from '@styles/components/Button.module.css'
 
 const Button = ({
   children,
-  onClick,
   grow = false,
+  thin = false,
   primary = false,
-  secondary = false
+  secondary = false,
+  to = null,
+  onClick = () => {}
 }) => {
   const className = styles.button +
     (grow ? ` ${styles.grow}` : '') +
+    (thin ? ` ${styles.thin}` : '') +
     (primary ? ` ${styles.primary}` : '') +
     (secondary ? ` ${styles.secondary}` : '')
 

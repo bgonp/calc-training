@@ -1,17 +1,22 @@
 .button {
-  color: var(--color-first);
+  align-items: center;
   background: var(--color-white);
-  padding: 0 4vh;
+  border: none;
+  color: var(--color-first);
+  cursor: pointer;
+  display: flex;
   font-size: 5vh;
   font-weight: 500;
-  letter-spacing: 1vh;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 11vh;
+  justify-content: center;
+  outline: none;
+  padding: 0 2vh;
+  position: relative;
+}
+
+.button:not(.thin) {
+  letter-spacing: 1vh;
+  padding: 0 4vh;
 }
 
 .grow {
@@ -19,11 +24,11 @@
 }
 
 .primary {
-  color: var(--color-white);
   background: var(--color-first);
+  color: var(--color-white);
 }
 
 .secondary {
-  color: var(--color-white);
   background: var(--color-second);
+  color: var(--color-white);
 }
