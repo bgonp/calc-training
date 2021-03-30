@@ -1,0 +1,42 @@
+.calendar {
+  display: grid;
+  gap: 0.4vh;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekDay {
+  color: var(--color-first);
+  font-size: 2vh;
+  font-weight: 600;
+  padding: 3vh 0;
+  text-align: center;
+}
+
+.filled, .empty {
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  height: 9vh;
+  justify-content: space-between;
+  padding: 1vh 0.25vh;
+}
+
+.filled {
+  background: var(--color-first);
+}
+
+.empty {
+  background: var(--color-second);
+}
+
+.dayNumber {
+  font-size: 2.5vh;
+  font-weight: 600;
+}
+
+.dayData {
+  font-size: 1.7vh;
+  font-weight: 600;
+}
