@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'wouter'
 
+import Bars from '@components/Bars'
 import Button from '@components/Button'
 import Calendar from '@components/Calendar'
 import { LeftIcon, RightIcon } from '@components/icons'
@@ -31,6 +32,7 @@ const Stats = () => {
       </div>
       <div className={styles.main}>
         <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
+        <Bars data={data} days={days} />
       </div>
       <div className={styles.footer}>
         <Button grow primary onClick={() => setLocation(ROUTE_MAIN)}>BACK</Button>
