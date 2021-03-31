@@ -11,7 +11,7 @@ import styles from '@styles/components/Header.module.css'
 
 const Header = ({ isCompleted }) => {
   const [, setLocation] = useLocation()
-  const { isLoading, user, signIn, signOut } = useFirebase()
+  const { isAuthed, isLoading, signIn, signOut } = useFirebase()
   const { renderModal } = useModal()
 
   const handleSignOut = () => renderModal(
@@ -34,7 +34,7 @@ const Header = ({ isCompleted }) => {
     )
   }
 
-  if (user) {
+  if (isAuthed) {
     return (
       <header className={styles.header}>
         <Button grow primary onClick={handleStats}><ChartIcon /></Button>

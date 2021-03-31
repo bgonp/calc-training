@@ -4,7 +4,7 @@ import { useFirebase } from '@contexts/FirebaseContext'
 import { twoDigits } from '@utils/twoDigits'
 
 const useCalendar = () => {
-  const { getAttempts, user } = useFirebase()
+  const { getAttempts, isAuthed } = useFirebase()
   const [data, setData] = useState(null)
   const [year, setYear] = useState(() => new Date().getFullYear())
   const [month, setMonth] = useState(() => new Date().getMonth() + 1)
@@ -38,11 +38,11 @@ const useCalendar = () => {
   }
 
   useEffect(() => {
-    if (!user) return
+    if (!isAuthed) return
     const initDate = new Date(year, month - 1)
     const finishDate = new Date(year, month, 1)
     getAttempts(initDate, finishDate).then(data => setData(data))
-  }, [getAttempts, month, year, user])
+  }, [getAttempts, isAuthed, month, year])
 
   return {
     data,

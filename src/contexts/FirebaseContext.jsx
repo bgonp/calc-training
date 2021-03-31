@@ -35,6 +35,8 @@ export const FirebaseProvider = ({ children }) => {
   const [isStoring, setIsStoring] = useState(false)
   const [startTime, setStartTime] = useState(null)
 
+  const isAuthed = Boolean(user)
+
   const getAttempts = useCallback(
     async (initDate, finishDate) => {
       if (!user) return {}
@@ -84,7 +86,7 @@ export const FirebaseProvider = ({ children }) => {
   return (
     <FirebaseContext.Provider
       value={{
-        user,
+        isAuthed,
         isLoading,
         isStored,
         isStoring,

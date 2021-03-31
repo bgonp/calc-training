@@ -14,12 +14,12 @@ import styles from '@styles/components/Stats.module.css'
 
 const Stats = () => {
   const [, setLocation] = useLocation()
-  const { isLoading, user } = useFirebase()
+  const { isAuthed, isLoading } = useFirebase()
   const { data, days, firstDayOfWeek, monthTitle, nextMonth, prevMonth } = useCalendar()
 
   useEffect(() => {
-    if (!isLoading && !user) setLocation(ROUTE_MAIN)
-  }, [isLoading, user, setLocation])
+    if (!isLoading && !isAuthed) setLocation(ROUTE_MAIN)
+  }, [isAuthed, isLoading, setLocation])
 
   if (isLoading || !data) return <Loading />
 
