@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useFirebase } from '@contexts/FirebaseContext'
-
-const twoDigits = (number) => ('0' + number).slice(-2)
+import { twoDigits } from '@utils/twoDigits'
 
 const useCalendar = () => {
   const { getAttempts, user } = useFirebase()
@@ -41,7 +40,7 @@ const useCalendar = () => {
   useEffect(() => {
     if (!user) return
     const initDate = new Date(year, month - 1)
-    const finishDate = new Date(year, month, 0)
+    const finishDate = new Date(year, month, 1)
     getAttempts(initDate, finishDate).then(data => setData(data))
   }, [getAttempts, month, year, user])
 
