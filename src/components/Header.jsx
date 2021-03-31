@@ -11,7 +11,7 @@ import styles from '@styles/components/Header.module.css'
 
 const Header = () => {
   const [, setLocation] = useLocation()
-  const { isLoading, user, signIn, signOut } = useFirebase()
+  const { isCompleted, isLoading, user, signIn, signOut } = useFirebase()
   const { renderModal } = useModal()
 
   const handleSignOut = () => renderModal(
@@ -19,10 +19,12 @@ const Header = () => {
     signOut
   )
 
-  const handleStats = () => renderModal(
-    'Numbers will be discarded. Are you sure?',
-    () => setLocation(ROUTE_STATS)
-  )
+  const handleStats = () => isCompleted
+    ? setLocation(ROUTE_STATS)
+    : renderModal(
+      'Numbers will be discarded. Are you sure?',
+      () => setLocation(ROUTE_STATS)
+    )
 
   if (isLoading) {
     return (
