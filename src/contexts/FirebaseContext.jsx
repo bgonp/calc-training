@@ -78,7 +78,7 @@ export const FirebaseProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(() => setIsLoading(false))
     return unsubscribe
-  })
+  }, [])
 
   return (
     <FirebaseContext.Provider
