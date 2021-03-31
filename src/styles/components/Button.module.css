@@ -1,13 +1,13 @@
 .button {
   align-items: center;
-  background: var(--color-white);
+  background: var(--color-third);
   border: none;
   color: var(--color-first);
   cursor: pointer;
   display: flex;
   font-size: 5vh;
   font-weight: 500;
-  height: 11vh;
+  height: 10vh;
   justify-content: center;
   outline: none;
   padding: 0 2vh;
