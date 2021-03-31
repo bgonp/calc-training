@@ -30,10 +30,10 @@ export const useFirebase = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [user] = useAuthState(auth)
-  const [isCompleted, setIsCompleted] = useState(false)
+  const [isStored, setIsStored] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isStoring, setIsStoring] = useState(false)
   const [startTime, setStartTime] = useState(null)
-  const [attemptId, setAttemptId] = useState(null)
 
   const getAttempts = useCallback(
     async (initDate, finishDate) => {
@@ -55,30 +55,26 @@ export const FirebaseProvider = ({ children }) => {
 
   const signOut = useCallback(() => auth.signOut(), [])
 
-  const setSuccess = useCallback(success => {
-    if (!user || !attemptId) return
-    attemptsRef
-      .doc(attemptId)
-      .update({ success })
-      .then(() => setIsCompleted(true))
-  }, [attemptId, user])
-
   const start = useCallback(() => {
     setStartTime(new Date())
-    setAttemptId(null)
-    setIsCompleted(false)
+    setIsStored(false)
   }, [])
 
-  const store = useCallback((numbers) => {
-    if (!user) return
+  const store = useCallback((numbers, success) => {
+    if (isStoring || !user) return
+    setIsStoring(true)
     const attempt = {
+      uid: user.uid,
       start: startTime,
       end: new Date(),
-      uid: user.uid,
-      numbers
+      numbers,
+      success
     }
-    attemptsRef.add(attempt).then(({ id }) => setAttemptId(id))
-  }, [startTime, user])
+    attemptsRef.add(attempt).then(() => {
+      setIsStored(true)
+      setIsStoring(false)
+    })
+  }, [isStoring, startTime, user])
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(() => setIsLoading(false))
@@ -89,12 +85,12 @@ export const FirebaseProvider = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         user,
-        isCompleted,
         isLoading,
+        isStored,
+        isStoring,
         getAttempts,
         signIn,
         signOut,
-        setSuccess,
         start,
         store
       }}

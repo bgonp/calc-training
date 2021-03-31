@@ -9,9 +9,9 @@ import { useModal } from '@contexts/ModalContext'
 
 import styles from '@styles/components/Header.module.css'
 
-const Header = () => {
+const Header = ({ isCompleted }) => {
   const [, setLocation] = useLocation()
-  const { isCompleted, isLoading, user, signIn, signOut } = useFirebase()
+  const { isLoading, user, signIn, signOut } = useFirebase()
   const { renderModal } = useModal()
 
   const handleSignOut = () => renderModal(
