@@ -29,7 +29,7 @@ const Header = () => {
   if (isLoading) {
     return (
       <header className={styles.header}>
-        <Button grow primary><Loading small /></Button>
+        <Button grow secondary><Loading small /></Button>
       </header>
     )
   }
