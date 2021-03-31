@@ -23,29 +23,27 @@ const Footer = ({ solved, handleRestart, handleSolve }) => {
     setAnswered(true)
   }
 
-  const startedButtons = (
-    <>
-      <Button grow secondary onClick={handleSolve}>SOLVE</Button>
-      <Button primary onClick={undo}><UndoIcon /></Button>
-    </>
-  )
+  if (!solved) {
+    return (
+      <div className={styles.footer}>
+        <Button grow secondary onClick={handleSolve}>SOLVE</Button>
+        <Button primary onClick={undo}><UndoIcon /></Button>
+      </div>
+    )
+  }
 
-  const answerButtons = (
-    <>
-      <Button grow primary onClick={handleAnswer(true)}><TickIcon /></Button>
-      <Button grow secondary onClick={handleAnswer(false)}><CloseIcon /></Button>
-    </>
-  )
-
-  const finishedButtons = (
-    <Button grow primary onClick={onRestart}>
-      <RestartIcon />
-    </Button>
-  )
+  if (!answered) {
+    return (
+      <div className={styles.footer}>
+        <Button grow primary onClick={handleAnswer(true)}><TickIcon /></Button>
+        <Button grow secondary onClick={handleAnswer(false)}><CloseIcon /></Button>
+      </div>
+    )
+  }
 
   return (
     <div className={styles.footer}>
-      {solved ? (answered ? finishedButtons : answerButtons) : startedButtons}
+      <Button grow primary onClick={onRestart}><RestartIcon /></Button>
     </div>
   )
 }
