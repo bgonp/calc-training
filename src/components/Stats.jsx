@@ -21,8 +21,6 @@ const Stats = () => {
     if (!isLoading && !isAuthed) setLocation(ROUTE_MAIN)
   }, [isAuthed, isLoading, setLocation])
 
-  if (isLoading || !data) return <Loading />
-
   return (
     <>
       <div className={styles.header}>
@@ -31,8 +29,14 @@ const Stats = () => {
         <Button thin primary onClick={nextMonth}><RightIcon /></Button>
       </div>
       <div className={styles.main}>
-        <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
-        <Bars data={data} days={days} />
+        {isLoading || !data
+          ? <Loading />
+          : (
+            <>
+              <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
+              <Bars data={data} days={days} />
+            </>
+            )}
       </div>
       <div className={styles.footer}>
         <Button grow primary onClick={() => setLocation(ROUTE_MAIN)}>BACK</Button>
