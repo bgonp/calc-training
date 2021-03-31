@@ -1,4 +1,12 @@
-const parseDate = (date) => date.toDate().toISOString().split('T')[0]
+import { twoDigits } from '@utils/twoDigits'
+
+const parseDate = (firebaseDate) => {
+  const date = firebaseDate.toDate()
+  const year = date.getFullYear()
+  const month = twoDigits(date.getMonth() + 1)
+  const day = twoDigits(date.getDate())
+  return `${year}-${month}-${day}`
+}
 
 export const normalizeAttempts = (snapshot) => {
   const attempts = {}
@@ -7,6 +15,7 @@ export const normalizeAttempts = (snapshot) => {
     if (!data.end) return
 
     const date = parseDate(data.end)
+    console.log(date)
     if (!attempts[date]) attempts[date] = [0, 0, 0]
 
     attempts[date][0]++
