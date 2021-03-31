@@ -15,12 +15,10 @@ export const normalizeAttempts = (snapshot) => {
     if (!data.end) return
 
     const date = parseDate(data.end)
-    console.log(date)
-    if (!attempts[date]) attempts[date] = [0, 0, 0]
+    if (!attempts[date]) attempts[date] = [0, 0]
 
     attempts[date][0]++
     if (data.success === true) attempts[date][1]++
-    else if (data.success === false) attempts[date][2]++
   })
 
   return attempts
