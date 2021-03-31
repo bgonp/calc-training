@@ -30,6 +30,7 @@ export const useFirebase = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [user] = useAuthState(auth)
+  const [isCompleted, setIsCompleted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [startTime, setStartTime] = useState(null)
   const [attemptId, setAttemptId] = useState(null)
@@ -56,12 +57,16 @@ export const FirebaseProvider = ({ children }) => {
 
   const setSuccess = useCallback(success => {
     if (!user || !attemptId) return
-    attemptsRef.doc(attemptId).update({ success })
+    attemptsRef
+      .doc(attemptId)
+      .update({ success })
+      .then(() => setIsCompleted(true))
   }, [attemptId, user])
 
   const start = useCallback(() => {
     setStartTime(new Date())
     setAttemptId(null)
+    setIsCompleted(false)
   }, [])
 
   const store = useCallback((numbers) => {
@@ -84,6 +89,7 @@ export const FirebaseProvider = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         user,
+        isCompleted,
         isLoading,
         getAttempts,
         signIn,
