@@ -4,13 +4,13 @@ import Footer from '@components/Footer'
 import Header from '@components/Header'
 import Numbers from '@components/Numbers'
 import Result from '@components/Result'
-import { useFirebase } from '@contexts/FirebaseContext'
+import { useAttempts } from '@contexts/AttemptsContext'
 import useCalc from '@hooks/useCalc'
 
 import styles from '@styles/components/Main.module.css'
 
 const Main = () => {
-  const { isStoring } = useFirebase()
+  const { isStoring } = useAttempts()
   const { isCompleted, isSolved, numbers, result, complete, solve, restart } = useCalc()
 
   return (

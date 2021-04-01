@@ -4,14 +4,14 @@ import Button from '@components/Button'
 import { ChartIcon, LogInIcon, LogOutIcon } from '@components/icons'
 import Loading from '@components/Loading'
 import { ROUTE_STATS } from '@constants/routes'
-import { useFirebase } from '@contexts/FirebaseContext'
+import { useAuth } from '@contexts/AuthContext'
 import { useModal } from '@contexts/ModalContext'
 
 import styles from '@styles/components/Header.module.css'
 
 const Header = ({ isCompleted }) => {
   const [, setLocation] = useLocation()
-  const { isAuthed, isLoading, signIn, signOut } = useFirebase()
+  const { isAuthed, isLoading, signIn, signOut } = useAuth()
   const { renderModal } = useModal()
 
   const handleSignOut = () => renderModal(

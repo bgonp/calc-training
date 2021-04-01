@@ -1,12 +1,14 @@
 import { useCallback, useState, useMemo, useEffect } from 'react'
 
-import { useFirebase } from '@contexts/FirebaseContext'
 import useRandomNumbers from '@hooks/useRandomNumbers'
+import { useAuth } from '@contexts/AuthContext'
+import { useAttempts } from '@contexts/AttemptsContext'
 
 const useCalc = () => {
   const [isSolved, setIsSolved] = useState(false)
   const [numbers, nextNumbers] = useRandomNumbers()
-  const { isAuthed, isStored, start, store } = useFirebase()
+  const { isAuthed } = useAuth()
+  const { isStored, start, store } = useAttempts()
 
   const result = useMemo(() => numbers.reduce((a, b) => a + b), [numbers])
 

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { useFirebase } from '@contexts/FirebaseContext'
+import { useAuth } from '@contexts/AuthContext'
+import { useAttempts } from '@contexts/AttemptsContext'
 import { twoDigits } from '@utils/twoDigits'
 
 const useCalendar = () => {
-  const { fetch, isAuthed } = useFirebase()
+  const { isAuthed } = useAuth()
+  const { fetch } = useAttempts()
   const [data, setData] = useState(null)
   const [year, setYear] = useState(() => new Date().getFullYear())
   const [month, setMonth] = useState(() => new Date().getMonth() + 1)

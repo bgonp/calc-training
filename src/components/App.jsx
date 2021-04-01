@@ -1,5 +1,6 @@
 import Router from '@components/Router'
-import { FirebaseProvider } from '@contexts/FirebaseContext'
+import { AttemptsProvider } from '@contexts/AttemptsContext'
+import { AuthProvider } from '@contexts/AuthContext'
 import { ModalProvider } from '@contexts/ModalContext'
 import useHeight from '@hooks/useHeight'
 
@@ -11,9 +12,11 @@ const App = () => {
   return (
     <div className={styles.container} style={{ height }}>
       <ModalProvider>
-        <FirebaseProvider>
-          <Router />
-        </FirebaseProvider>
+        <AuthProvider>
+          <AttemptsProvider>
+            <Router />
+          </AttemptsProvider>
+        </AuthProvider>
       </ModalProvider>
     </div>
   )

@@ -7,14 +7,14 @@ import Calendar from '@components/Calendar'
 import { LeftIcon, RightIcon } from '@components/icons'
 import Loading from '@components/Loading'
 import { ROUTE_MAIN } from '@constants/routes'
-import { useFirebase } from '@contexts/FirebaseContext'
+import { useAuth } from '@contexts/AuthContext'
 import useCalendar from '@hooks/useCalendar'
 
 import styles from '@styles/components/Stats.module.css'
 
 const Stats = () => {
   const [, setLocation] = useLocation()
-  const { isAuthed, isLoading } = useFirebase()
+  const { isAuthed, isLoading } = useAuth()
   const { data, days, firstDayOfWeek, monthTitle, nextMonth, prevMonth } = useCalendar()
 
   useEffect(() => {
@@ -28,16 +28,14 @@ const Stats = () => {
         <Button grow thin>{monthTitle}</Button>
         <Button thin primary onClick={nextMonth}><RightIcon /></Button>
       </div>
-      <div className={styles.main}>
-        {isLoading || !data
-          ? <Loading />
-          : (
-            <>
-              <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
-              <Bars data={data} days={days} />
-            </>
-            )}
-      </div>
+      {isLoading || !data
+        ? <div className={styles.main}><Loading /></div>
+        : (
+          <div className={styles.main}>
+            <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
+            <Bars data={data} days={days} />
+          </div>
+          )}
       <div className={styles.footer}>
         <Button grow primary onClick={() => setLocation(ROUTE_MAIN)}>BACK</Button>
       </div>
