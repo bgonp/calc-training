@@ -1,7 +1,7 @@
 import { twoDigits } from '@utils/twoDigits'
 
-const parseDate = (firebaseDate) => {
-  const date = firebaseDate.toDate()
+const parseDate = (fetchedDate) => {
+  const date = fetchedDate.toDate()
   const year = date.getFullYear()
   const month = twoDigits(date.getMonth() + 1)
   const day = twoDigits(date.getDate())
