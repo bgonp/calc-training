@@ -12,6 +12,10 @@
   outline: none;
   padding: 0 2vh;
   position: relative;
+
+  & > svg {
+    height: 5vh;
+  }
 }
 
 .button:not(.thin) {
