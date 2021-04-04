@@ -1,18 +1,15 @@
 import { useCallback, useState } from 'react'
 
 import { BOUNDS, MAX_QUANTITY, MIN_QUANTITY } from '@constants/numbers'
-import { numberGenerator } from '@utils/numberGenerator'
-import { randomNumber } from '@utils/randomNumber'
+import { getRandomNumbersFactory } from '@utils/randomNumbers'
 
-const generator = numberGenerator(...BOUNDS)
-const quantity = { min: MIN_QUANTITY, max: MAX_QUANTITY }
-const getNextNumbers = () => [...Array(randomNumber(quantity))].map(() => generator.next().value)
+const getRandomNumbers = getRandomNumbersFactory(MIN_QUANTITY, MAX_QUANTITY, BOUNDS)
 
 const useRandomNumbers = () => {
-  const [numbers, setNumbers] = useState(getNextNumbers)
+  const [numbers, setNumbers] = useState(getRandomNumbers)
 
   const nextNumbers = useCallback(() => {
-    setNumbers(getNextNumbers())
+    setNumbers(getRandomNumbers())
   }, [])
 
   return [numbers, nextNumbers]
