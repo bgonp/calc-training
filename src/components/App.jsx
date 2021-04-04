@@ -7,7 +7,7 @@ import useHeight from '@hooks/useHeight'
 import styles from '@styles/components/App.module.css'
 
 const App = () => {
-  const height = useHeight()
+  const height = useHeight(window)
 
   return (
     <div className={styles.container} style={{ height }}>

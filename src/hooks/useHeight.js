@@ -1,13 +1,13 @@
 import { useLayoutEffect, useState } from 'react'
 
-const useHeight = () => {
-  const [height, setHeight] = useState(() => window.innerHeight)
+const useHeight = (element) => {
+  const [height, setHeight] = useState(() => element.innerHeight)
 
   useLayoutEffect(() => {
-    const setNewHeight = () => setHeight(window.innerHeight)
+    const setNewHeight = () => setHeight(element.innerHeight)
     window.addEventListener('resize', setNewHeight)
     return () => window.removeEventListener('resize', setNewHeight)
-  }, [])
+  }, [element])
 
   return height
 }
