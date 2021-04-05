@@ -1,0 +1,10 @@
+{
+  "name": "Calc Trainig",
+  "short_name": "Calc Training",
+  "start_url": "/",
+  "icons": [],
+  "theme_color": "#4ba3c3",
+  "background_color": "#f7f9f9",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
