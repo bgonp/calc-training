@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jest"
+  ],
+  "rules": {
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
+    "max-len": ["error", { "code": 90 }],
+    "no-console": ["warn", { "allow": ["error"] }],
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

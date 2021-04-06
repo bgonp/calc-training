@@ -4,30 +4,30 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "eslint src && jest -i"
   },
   "dependencies": {
-    "firebase": "8.3.1",
+    "firebase": "8.3.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-drawarea": "1.1.1",
     "wouter": "2.7.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-refresh": "1.3.1",
+    "@vitejs/plugin-react-refresh": "1.3.2",
+    "esbuild-jest-transform": "1.0.4",
+    "eslint": "7.23.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.3.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-react": "7.23.1",
     "eslint-plugin-react-hooks": "4.2.0",
+    "jest": "26.6.3",
     "postcss-preset-env": "6.7.0",
-    "standard": "16.0.3",
-    "vite": "2.1.3"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json",
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
+    "prop-types": "15.7.2",
+    "vite": "2.1.5"
   }
 }
