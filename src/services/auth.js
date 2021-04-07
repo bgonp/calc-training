@@ -1,4 +1,4 @@
-import { auth, firebase } from '@utils/firebase'
+import { auth, firebase } from 'utils/firebase'
 
 export const signIn = () => {
   const provider = new firebase.auth.GoogleAuthProvider()

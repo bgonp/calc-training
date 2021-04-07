@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { useAuth } from '@contexts/AuthContext'
-import { useAttempts } from '@contexts/AttemptsContext'
-import { twoDigits } from '@utils/twoDigits'
+import { useAuth } from 'contexts/AuthContext'
+import { useAttempts } from 'contexts/AttemptsContext'
+import { twoDigits } from 'utils/twoDigits'
 
 const useCalendar = () => {
   const { isAuthed } = useAuth()

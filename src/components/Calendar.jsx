@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types'
 
-import styles from '@styles/components/Calendar.module.css'
+import styles from 'styles/components/Calendar.module.css'
 
 const weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 

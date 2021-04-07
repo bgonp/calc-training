@@ -1,3 +1,3 @@
 module.exports = {
-  target: 'es2015',
+  target: 'es2020',
 }

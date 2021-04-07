@@ -2,11 +2,11 @@ import { useContext } from 'react'
 import { PropTypes } from 'prop-types'
 import { DrawContext } from 'react-drawarea'
 
-import Button from '@components/Button'
-import Loading from '@components/Loading'
-import { CloseIcon, RestartIcon, TickIcon, UndoIcon } from '@components/icons'
+import Button from 'components/Button'
+import Loading from 'components/Loading'
+import { CloseIcon, RestartIcon, TickIcon, UndoIcon } from 'components/icons'
 
-import styles from '@styles/components/Footer.module.css'
+import styles from 'styles/components/Footer.module.css'
 
 const Footer = ({
   isCompleted,

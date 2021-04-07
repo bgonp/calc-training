@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types'
 
-import styles from '@styles/components/Button.module.css'
+import styles from 'styles/components/Button.module.css'
 
 const Button = ({
   children,

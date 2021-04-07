@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useLocation } from 'wouter'
 
-import Bars from '@components/Bars'
-import Button from '@components/Button'
-import Calendar from '@components/Calendar'
-import { LeftIcon, RightIcon } from '@components/icons'
-import Loading from '@components/Loading'
-import { ROUTE_MAIN } from '@constants/routes'
-import { useAuth } from '@contexts/AuthContext'
-import useCalendar from '@hooks/useCalendar'
+import Bars from 'components/Bars'
+import Button from 'components/Button'
+import Calendar from 'components/Calendar'
+import { LeftIcon, RightIcon } from 'components/icons'
+import Loading from 'components/Loading'
+import { ROUTE_MAIN } from 'constants/routes'
+import { useAuth } from 'contexts/AuthContext'
+import useCalendar from 'hooks/useCalendar'
 
-import styles from '@styles/components/Stats.module.css'
+import styles from 'styles/components/Stats.module.css'
 
 const Stats = () => {
   const [, setLocation] = useLocation()

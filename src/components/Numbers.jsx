@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types'
 
-import styles from '@styles/components/Numbers.module.css'
+import styles from 'styles/components/Numbers.module.css'
 
 const Numbers = ({ numbers, isSolved }) => (
   <div className={`${styles.container} ${isSolved ? styles.solved : ''}`}>

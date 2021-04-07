@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types'
 
-import styles from '@styles/components/Bars.module.css'
+import styles from 'styles/components/Bars.module.css'
 
 const Bars = ({ data, days }) => {
   const max = Math.max(...Object.keys(data).map(date => data[date][0]))

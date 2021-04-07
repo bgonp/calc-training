@@ -1,5 +1,5 @@
-import { firestore } from '@utils/firebase'
-import { twoDigits } from '@utils/twoDigits'
+import { firestore } from 'utils/firebase'
+import { twoDigits } from 'utils/twoDigits'
 
 const attemptsRef = firestore.collection('attempts')
 

@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
 
-import { useAuth } from '@contexts/AuthContext'
-import { useModal } from '@contexts/ModalContext'
-import { fetchAttempts, storeAttempt } from '@services/storage'
+import { useAuth } from 'contexts/AuthContext'
+import { useModal } from 'contexts/ModalContext'
+import { fetchAttempts, storeAttempt } from 'services/storage'
 
 const AttemptsContext = createContext(null)
 

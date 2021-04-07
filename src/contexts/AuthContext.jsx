@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types'
 
-import { onAuthChange, signIn, signOut } from '@services/auth'
+import { onAuthChange, signIn, signOut } from 'services/auth'
 
 const AuthContext = createContext(null)
 
