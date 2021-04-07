@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types'
+
 import styles from '@styles/components/Numbers.module.css'
 
 const Numbers = ({ numbers, isSolved }) => (
@@ -9,5 +11,10 @@ const Numbers = ({ numbers, isSolved }) => (
     </div>
   </div>
 )
+
+Numbers.propTypes = {
+  numbers: PropTypes.arrayOf(PropTypes.number).isRequired,
+  isSolved: PropTypes.bool.isRequired,
+}
 
 export default Numbers

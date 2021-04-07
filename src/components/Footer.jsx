@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { PropTypes } from 'prop-types'
 import { DrawContext } from 'react-drawarea'
 
 import Button from '@components/Button'
@@ -13,7 +14,7 @@ const Footer = ({
   isSolved,
   handleRestart,
   handleSolve,
-  handleSuccess
+  handleSuccess,
 }) => {
   const { undo, reset } = useContext(DrawContext)
 
@@ -55,6 +56,15 @@ const Footer = ({
       <Button grow primary onClick={onRestart}><RestartIcon /></Button>
     </div>
   )
+}
+
+Footer.propTypes = {
+  isCompleted: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isSolved: PropTypes.bool.isRequired,
+  handleRestart: PropTypes.func.isRequired,
+  handleSolve: PropTypes.func.isRequired,
+  handleSuccess: PropTypes.func.isRequired,
 }
 
 export default Footer

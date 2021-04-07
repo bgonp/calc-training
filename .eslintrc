@@ -4,6 +4,7 @@
     "es2021": true,
     "jest": true
   },
+  "ignorePatterns": ["src/styles/**"],
   "extends": [
     "plugin:react/recommended",
     "standard"

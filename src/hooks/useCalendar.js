@@ -52,7 +52,7 @@ const useCalendar = () => {
     firstDayOfWeek,
     monthTitle,
     nextMonth,
-    prevMonth
+    prevMonth,
   }
 }
 

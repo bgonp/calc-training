@@ -1,3 +1,4 @@
+import { PropTypes } from 'prop-types'
 
 import Button from '@components/Button'
 import { CloseIcon, TickIcon } from '@components/icons'
@@ -13,5 +14,11 @@ const Modal = ({ message, onClose, onConfirm }) => (
     </div>
   </div>
 )
+
+Modal.propTypes = {
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+}
 
 export default Modal

@@ -1,4 +1,5 @@
 import { useLocation } from 'wouter'
+import { PropTypes } from 'prop-types'
 
 import Button from '@components/Button'
 import { ChartIcon, LogInIcon, LogOutIcon } from '@components/icons'
@@ -48,6 +49,10 @@ const Header = ({ isCompleted }) => {
       <Button grow primary onClick={signIn}><LogInIcon /></Button>
     </header>
   )
+}
+
+Header.propTypes = {
+  isCompleted: PropTypes.bool.isRequired,
 }
 
 export default Header

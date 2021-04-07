@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types'
+
 import styles from '@styles/components/Bars.module.css'
 
 const Bars = ({ data, days }) => {
@@ -26,6 +28,11 @@ const Bars = ({ data, days }) => {
       ))}
     </div>
   )
+}
+
+Bars.propTypes = {
+  data: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  days: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default Bars

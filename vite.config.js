@@ -12,14 +12,14 @@ export default defineConfig({
         const hash = Math.random().toString(36).slice(2, 8)
 
         return `${file}__${name}--${hash}`
-      }
-    }
+      },
+    },
   },
   esbuild: {
-    jsxInject: "import React from 'react'"
+    jsxInject: "import * as React from 'react'",
   },
   plugins: [
-    reactRefresh()
+    reactRefresh(),
   ],
   resolve: {
     alias: {
@@ -29,7 +29,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@services': path.resolve(__dirname, 'src/services'),
       '@styles': path.resolve(__dirname, 'src/styles'),
-      '@utils': path.resolve(__dirname, 'src/utils')
-    }
-  }
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
+  },
 })

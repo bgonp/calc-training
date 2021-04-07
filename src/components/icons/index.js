@@ -17,5 +17,5 @@ export {
   RestartIcon,
   RightIcon,
   TickIcon,
-  UndoIcon
+  UndoIcon,
 }

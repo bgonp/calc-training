@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { PropTypes } from 'prop-types'
 
 import { onAuthChange, signIn, signOut } from '@services/auth'
 
@@ -33,10 +34,14 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         userId,
         signIn,
-        signOut
+        signOut,
       }}
     >
       {children}
     </AuthContext.Provider>
   )
+}
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }

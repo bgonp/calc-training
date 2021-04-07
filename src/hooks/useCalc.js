@@ -33,7 +33,7 @@ const useCalc = () => {
     result,
     complete,
     restart,
-    solve
+    solve,
   }
 }
 
