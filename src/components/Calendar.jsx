@@ -1,4 +1,6 @@
-import styles from '@styles/components/Calendar.module.css'
+import { PropTypes } from 'prop-types'
+
+import styles from 'styles/components/Calendar.module.css'
 
 const weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 
@@ -22,5 +24,11 @@ const Stats = ({ data, days, firstDayOfWeek }) => (
     })}
   </div>
 )
+
+Stats.propTypes = {
+  data: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  days: PropTypes.arrayOf(PropTypes.string).isRequired,
+  firstDayOfWeek: PropTypes.number.isRequired,
+}
 
 export default Stats

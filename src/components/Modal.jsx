@@ -1,8 +1,9 @@
+import { PropTypes } from 'prop-types'
 
-import Button from '@components/Button'
-import { CloseIcon, TickIcon } from '@components/icons'
+import Button from 'components/Button'
+import { CloseIcon, TickIcon } from 'components/icons'
 
-import styles from '@styles/components/Modal.module.css'
+import styles from 'styles/components/Modal.module.css'
 
 const Modal = ({ message, onClose, onConfirm }) => (
   <div className={styles.modal}>
@@ -13,5 +14,11 @@ const Modal = ({ message, onClose, onConfirm }) => (
     </div>
   </div>
 )
+
+Modal.propTypes = {
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+}
 
 export default Modal

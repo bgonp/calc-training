@@ -1,4 +1,6 @@
-import styles from '@styles/components/Bars.module.css'
+import { PropTypes } from 'prop-types'
+
+import styles from 'styles/components/Bars.module.css'
 
 const Bars = ({ data, days }) => {
   const max = Math.max(...Object.keys(data).map(date => data[date][0]))
@@ -26,6 +28,11 @@ const Bars = ({ data, days }) => {
       ))}
     </div>
   )
+}
+
+Bars.propTypes = {
+  data: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  days: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default Bars

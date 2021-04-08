@@ -1,5 +1,5 @@
-import { firestore } from '@utils/firebase'
-import { twoDigits } from '@utils/twoDigits'
+import { firestore } from 'utils/firebase'
+import { twoDigits } from 'utils/twoDigits'
 
 const attemptsRef = firestore.collection('attempts')
 
@@ -37,5 +37,5 @@ export const fetchAttempts = async (uid, initDate, finishDate) => {
   return normalizeAttempts(snapshot)
 }
 
-export const storeAttempt = (attempt, callback) =>
-  attemptsRef.add(attempt).then(callback)
+export const storeAttempt = (attempt) =>
+  attemptsRef.add(attempt)

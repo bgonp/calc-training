@@ -1,13 +1,14 @@
 import { createContext, useContext, useState } from 'react'
+import { PropTypes } from 'prop-types'
 
-import Modal from '@components/Modal'
+import Modal from 'components/Modal'
 
 const ModalContext = createContext()
 
 const initialModalData = {
   visible: false,
   message: '',
-  onConfirm: () => {}
+  onConfirm: () => {},
 }
 
 export const useModal = () => {
@@ -31,7 +32,7 @@ export const ModalProvider = ({ children }) => {
     setModalData({
       visible: true,
       message,
-      onConfirm
+      onConfirm,
     })
   }
 
@@ -42,4 +43,8 @@ export const ModalProvider = ({ children }) => {
         <Modal message={message} onClose={handleClose} onConfirm={handleConfirm} />}
     </ModalContext.Provider>
   )
+}
+
+ModalProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }

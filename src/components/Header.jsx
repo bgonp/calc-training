@@ -1,13 +1,14 @@
 import { useLocation } from 'wouter'
+import { PropTypes } from 'prop-types'
 
-import Button from '@components/Button'
-import { ChartIcon, LogInIcon, LogOutIcon } from '@components/icons'
-import Loading from '@components/Loading'
-import { ROUTE_STATS } from '@constants/routes'
-import { useAuth } from '@contexts/AuthContext'
-import { useModal } from '@contexts/ModalContext'
+import Button from 'components/Button'
+import { ChartIcon, LogInIcon, LogOutIcon } from 'components/icons'
+import Loading from 'components/Loading'
+import { ROUTE_STATS } from 'constants/routes'
+import { useAuth } from 'contexts/AuthContext'
+import { useModal } from 'contexts/ModalContext'
 
-import styles from '@styles/components/Header.module.css'
+import styles from 'styles/components/Header.module.css'
 
 const Header = ({ isCompleted }) => {
   const [, setLocation] = useLocation()
@@ -48,6 +49,10 @@ const Header = ({ isCompleted }) => {
       <Button grow primary onClick={signIn}><LogInIcon /></Button>
     </header>
   )
+}
+
+Header.propTypes = {
+  isCompleted: PropTypes.bool.isRequired,
 }
 
 export default Header

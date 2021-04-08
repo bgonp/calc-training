@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 
-import { BOUNDS, MAX_QUANTITY, MIN_QUANTITY } from '@constants/numbers'
-import { getRandomNumbersFactory } from '@utils/randomNumbers'
+import { BOUNDS, MAX_QUANTITY, MIN_QUANTITY } from 'constants/numbers'
+import { getRandomNumbersFactory } from 'utils/randomNumbers'
 
 const getRandomNumbers = getRandomNumbersFactory(MIN_QUANTITY, MAX_QUANTITY, BOUNDS)
 

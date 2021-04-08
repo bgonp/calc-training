@@ -6,7 +6,11 @@ const runOneOf = (callbacks) => {
   return callbacks[index]()
 }
 
-export const getRandomNumbersFactory = (minQuantity, maxQuantity, bounds) => {
+export const getRandomNumbersFactory = (
+  minQuantity = 1,
+  maxQuantity = 1,
+  bounds = [[0, 1000]]
+) => {
   const callbacks = bounds.map(([min, max]) => () => getRandomNumber(min, max))
 
   return () => {

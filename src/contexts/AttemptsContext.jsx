@@ -1,7 +1,9 @@
 import { createContext, useCallback, useContext, useState } from 'react'
+import { PropTypes } from 'prop-types'
 
-import { useAuth } from '@contexts/AuthContext'
-import { fetchAttempts, storeAttempt } from '@services/storage'
+import { useAuth } from 'contexts/AuthContext'
+import { useModal } from 'contexts/ModalContext'
+import { fetchAttempts, storeAttempt } from 'services/storage'
 
 const AttemptsContext = createContext(null)
 
@@ -14,6 +16,7 @@ export const useAttempts = () => {
 
 export const AttemptsProvider = ({ children }) => {
   const { userId } = useAuth()
+  const { renderModal } = useModal()
   const [isStored, setIsStored] = useState(false)
   const [isStoring, setIsStoring] = useState(false)
   const [startTime, setStartTime] = useState(null)
@@ -28,7 +31,7 @@ export const AttemptsProvider = ({ children }) => {
     setIsStored(false)
   }, [])
 
-  const store = useCallback((numbers, success) => {
+  const store = useCallback(async (numbers, success) => {
     if (!userId || isStoring) return
 
     const attempt = {
@@ -36,16 +39,18 @@ export const AttemptsProvider = ({ children }) => {
       start: startTime,
       end: new Date(),
       numbers,
-      success
-    }
-    const callback = () => {
-      setIsStored(true)
-      setIsStoring(false)
+      success,
     }
 
     setIsStoring(true)
-    storeAttempt(attempt, callback)
-  }, [isStoring, startTime, userId])
+    try {
+      await storeAttempt(attempt)
+      setIsStored(true)
+    } catch {
+      renderModal('Oops! Something went wrong. Please try again')
+    }
+    setIsStoring(false)
+  }, [isStoring, startTime, userId, renderModal])
 
   return (
     <AttemptsContext.Provider
@@ -54,10 +59,14 @@ export const AttemptsProvider = ({ children }) => {
         isStoring,
         fetch,
         start,
-        store
+        store,
       }}
     >
       {children}
     </AttemptsContext.Provider>
   )
+}
+
+AttemptsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }

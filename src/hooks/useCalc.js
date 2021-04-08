@@ -1,8 +1,8 @@
 import { useCallback, useState, useMemo, useEffect } from 'react'
 
-import useRandomNumbers from '@hooks/useRandomNumbers'
-import { useAuth } from '@contexts/AuthContext'
-import { useAttempts } from '@contexts/AttemptsContext'
+import useRandomNumbers from 'hooks/useRandomNumbers'
+import { useAuth } from 'contexts/AuthContext'
+import { useAttempts } from 'contexts/AttemptsContext'
 
 const useCalc = () => {
   const [isSolved, setIsSolved] = useState(false)
@@ -33,7 +33,7 @@ const useCalc = () => {
     result,
     complete,
     restart,
-    solve
+    solve,
   }
 }
 
