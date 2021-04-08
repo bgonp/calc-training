@@ -1,15 +1,16 @@
 .result {
   background: var(--color-transparent);
-  width: 30vh;
-  height: 30vh;
+  border-radius: 50%;
+  color: var(--color-dark);
   font-size: 9vh;
   font-weight: 500;
-  line-height: 30vh;
-  position: absolute;
-  top: 50%;
+  height: 30vh;
   left: 50%;
+  line-height: 30vh;
   margin: -15vh;
-  border-radius: 50%;
+  position: absolute;
   text-align: center;
+  top: 50%;
+  width: 30vh;
   z-index: 1;
 }
