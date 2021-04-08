@@ -1,0 +1,8 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    "babel-plugin-transform-vite-meta-env",
+    ["module-resolver", { "root": ["./src"] }],
+    ["inline-dotenv", { "path": ".env.test", "unsafe": true }]
+  ]
+}
