@@ -1,7 +1,7 @@
-export const ROUTE_MAIN = '/'
+export const ROUTE_CALC = '/'
 export const ROUTE_STATS = '/stats'
 
 export const ROUTES = {
-  MAIN: ROUTE_MAIN,
+  CALC: ROUTE_CALC,
   STATS: ROUTE_STATS,
 }

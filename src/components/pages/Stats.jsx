@@ -6,7 +6,7 @@ import Button from 'components/Button'
 import Calendar from 'components/Calendar'
 import { LeftIcon, RightIcon } from 'components/icons'
 import Loading from 'components/Loading'
-import { ROUTE_MAIN } from 'constants/routes'
+import { ROUTE_CALC } from 'constants/routes'
 import { useAuth } from 'contexts/AuthContext'
 import useCalendar from 'hooks/useCalendar'
 
@@ -18,7 +18,7 @@ const Stats = () => {
   const { data, firstWeekDay, monthTitle, nextMonth, prevMonth } = useCalendar()
 
   useEffect(() => {
-    if (!isLoading && !isAuthed) setLocation(ROUTE_MAIN)
+    if (!isLoading && !isAuthed) setLocation(ROUTE_CALC)
   }, [isAuthed, isLoading, setLocation])
 
   return (
@@ -37,7 +37,7 @@ const Stats = () => {
           </div>
           )}
       <div className={styles.footer}>
-        <Button grow primary onClick={() => setLocation(ROUTE_MAIN)}>BACK</Button>
+        <Button grow primary onClick={() => setLocation(ROUTE_CALC)}>BACK</Button>
       </div>
     </>
   )

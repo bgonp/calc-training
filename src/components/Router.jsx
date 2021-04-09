@@ -1,13 +1,13 @@
 import { Route } from 'wouter'
 
-import Main from 'components/Main'
-import Stats from 'components/Stats'
+import Calc from 'components/pages/Calc'
+import Stats from 'components/pages/Stats'
 import { ROUTES } from 'constants/routes'
 
 const Router = () => (
   <>
     <Route path={ROUTES.STATS}><Stats /></Route>
-    <Route path={ROUTES.MAIN}><Main /></Route>
+    <Route path={ROUTES.CALC}><Calc /></Route>
   </>
 )
 

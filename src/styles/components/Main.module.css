@@ -1,7 +1,18 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
 .canvas {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.footer {
+  display: flex;
+  z-index: 1;
 }
