@@ -15,7 +15,7 @@ import styles from 'styles/components/Stats.module.css'
 const Stats = () => {
   const [, setLocation] = useLocation()
   const { isAuthed, isLoading } = useAuth()
-  const { data, days, firstDayOfWeek, monthTitle, nextMonth, prevMonth } = useCalendar()
+  const { data, firstWeekDay, monthTitle, nextMonth, prevMonth } = useCalendar()
 
   useEffect(() => {
     if (!isLoading && !isAuthed) setLocation(ROUTE_MAIN)
@@ -32,8 +32,8 @@ const Stats = () => {
         ? <div className={styles.main}><Loading /></div>
         : (
           <div className={styles.main}>
-            <Calendar data={data} days={days} firstDayOfWeek={firstDayOfWeek} />
-            <Bars data={data} days={days} />
+            <Calendar data={data} firstWeekDay={firstWeekDay} />
+            <Bars data={data} />
           </div>
           )}
       <div className={styles.footer}>

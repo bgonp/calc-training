@@ -1,21 +1,27 @@
 import { PropTypes } from 'prop-types'
 
+import { getDay, isPastDate, isToday } from 'utils/dates'
+
 import styles from 'styles/components/Calendar.module.css'
 
 const weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 
-const Stats = ({ data, days, firstDayOfWeek }) => (
+const Calendar = ({ data, firstWeekDay }) => (
   <div className={styles.calendar}>
     {weekDays.map(day => <span key={day} className={styles.weekDay}>{day}</span>)}
-    {days.map(date => {
-      const day = parseInt(date.split('-')[2])
-      const dayData = data[date] && `${data[date][1]} / ${data[date][0]}`
+    {Object.keys(data).map(date => {
+      const day = getDay(date)
+      const dayData = data[date].length === 2 && `${data[date][1]} / ${data[date][0]}`
+      const className = styles.day +
+        (dayData ? ` ${styles.filled}` : '') +
+        (isToday(date) ? ` ${styles.today}` : '') +
+        (isPastDate(date) ? ` ${styles.past}` : '')
 
       return (
         <div
           key={date}
-          className={styles[dayData ? 'filled' : 'empty']}
-          style={day === 1 ? { gridColumnStart: firstDayOfWeek } : {}}
+          className={className}
+          style={day === 1 ? { gridColumnStart: firstWeekDay } : {}}
         >
           <span className={styles.dayNumber}>{day}</span>
           {dayData && <span className={styles.dayData}>{dayData}</span>}
@@ -25,10 +31,9 @@ const Stats = ({ data, days, firstDayOfWeek }) => (
   </div>
 )
 
-Stats.propTypes = {
+Calendar.propTypes = {
   data: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  days: PropTypes.arrayOf(PropTypes.string).isRequired,
-  firstDayOfWeek: PropTypes.number.isRequired,
+  firstWeekDay: PropTypes.number.isRequired,
 }
 
-export default Stats
+export default Calendar

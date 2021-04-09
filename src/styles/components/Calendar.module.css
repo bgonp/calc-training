@@ -2,38 +2,65 @@
   display: grid;
   gap: 0.4vh;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 8vh);
+  padding: 0.4vh 0;
 }
 
 .weekDay {
+  align-items: center;
   color: var(--color-first);
+  display: flex;
   font-size: 2vh;
   font-weight: 600;
-  padding: 3vh 0;
+  justify-content: center;
   text-align: center;
 }
 
-.filled, .empty {
+.day {
   align-items: center;
+  background: var(--color-second);
   box-sizing: border-box;
   color: var(--color-white);
   display: flex;
   flex-direction: column;
-  height: 9vh;
   justify-content: space-between;
-  padding: 1vh 0.25vh;
+  padding: 0.8vh 0.25vh 1vh;
+  position: relative;
+}
+
+.past {
+  background: var(--color-third)
 }
 
 .filled {
   background: var(--color-first);
 }
 
-.empty {
-  background: var(--color-second);
+.past:not(.filled)::after {
+  content: '❌';
+  font-size: 1.5vh
 }
 
 .dayNumber {
   font-size: 2.5vh;
+  line-height: 3.35vh;
   font-weight: 600;
+  width: 3.6vh;
+  text-align: center;
+  height: 3.6vh;
+  border-radius: 50%;
+  letter-spacing: -0.2vh;
+  padding-right: 0.2vh;
+  box-sizing: border-box;
+}
+
+.today .dayNumber {
+  background: var(--color-white);
+  color: var(--color-second);
+}
+
+.today.filled .dayNumber {
+  color: var(--color-first);
 }
 
 .dayData {

@@ -1,7 +1,7 @@
 .bars {
   display: grid;
   flex-grow: 1;
-  padding: 5vh 0 0;
+  padding: 2vh 0 0;
 }
 
 .container {
