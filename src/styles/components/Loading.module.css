@@ -16,7 +16,7 @@
 }
 
 .spinner {
-  animation: var(--animation-spin);
+  animation: spin 1.2s linear infinite;
   height: 15vh;
   width: 15vh;
   border-radius: 50%;
@@ -27,4 +27,13 @@
 .small .spinner {
   height: 5vh;
   width: 5vh;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

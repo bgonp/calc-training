@@ -6,9 +6,7 @@ import Button from 'components/Button'
 import Loading from 'components/Loading'
 import { CloseIcon, RestartIcon, TickIcon, UndoIcon } from 'components/icons'
 
-import styles from 'styles/components/Footer.module.css'
-
-const Footer = ({
+const CalcButtons = ({
   isCompleted,
   isLoading,
   isSolved,
@@ -26,39 +24,31 @@ const Footer = ({
   }
 
   if (isLoading) {
-    return (
-      <div className={styles.footer}>
-        <Button grow secondary><Loading small /></Button>
-      </div>
-    )
+    return <Button grow secondary><Loading small /></Button>
   }
 
   if (!isSolved) {
     return (
-      <div className={styles.footer}>
+      <>
         <Button grow secondary onClick={handleSolve}>SOLVE</Button>
         <Button primary onClick={undo}><UndoIcon /></Button>
-      </div>
+      </>
     )
   }
 
   if (!isCompleted) {
     return (
-      <div className={styles.footer}>
+      <>
         <Button grow primary onClick={handleAnswer(true)}><TickIcon /></Button>
         <Button grow secondary onClick={handleAnswer(false)}><CloseIcon /></Button>
-      </div>
+      </>
     )
   }
 
-  return (
-    <div className={styles.footer}>
-      <Button grow primary onClick={onRestart}><RestartIcon /></Button>
-    </div>
-  )
+  return <Button grow primary onClick={onRestart}><RestartIcon /></Button>
 }
 
-Footer.propTypes = {
+CalcButtons.propTypes = {
   isCompleted: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isSolved: PropTypes.bool.isRequired,
@@ -67,4 +57,4 @@ Footer.propTypes = {
   handleSuccess: PropTypes.func.isRequired,
 }
 
-export default Footer
+export default CalcButtons
