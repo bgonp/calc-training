@@ -13,11 +13,11 @@ const hash = (content) => content
 
 export const generateScopedName = () => {
   const hashes = {}
-  const getHash = (name, content) => {
-    if (!hashes[name]) hashes[name] = hash(content)
-    return hashes[name]
-  }
 
-  return (name, filename, css) =>
-    `${getFileName(filename)}__${name}--${getHash(name, css)}`
+  return (name, file, css) => {
+    if (!hashes[file]) hashes[file] = {}
+    if (!hashes[file][name]) hashes[file][name] = hash(css)
+
+    return `${getFileName(file)}__${name}--${hashes[file][name]}`
+  }
 }
