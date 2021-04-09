@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types'
 
 import { useAuth } from 'contexts/AuthContext'
 import { useModal } from 'contexts/ModalContext'
-import { fetchAttempts, storeAttempt } from 'services/storage'
+import { fetchAttempts, storeAttempt } from 'services/attempts'
 
 const AttemptsContext = createContext(null)
 
