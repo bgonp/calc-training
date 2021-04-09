@@ -25,6 +25,7 @@
     "babel-plugin-inline-dotenv": "1.6.0",
     "babel-plugin-module-resolver": "4.1.0",
     "babel-plugin-transform-vite-meta-env": "1.0.2",
+    "core-js": "3.10.1",
     "eslint": "7.23.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
