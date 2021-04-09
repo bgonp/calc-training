@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useAuth } from 'contexts/AuthContext'
 import { useAttempts } from 'contexts/AttemptsContext'
-import { twoDigits } from 'utils/twoDigits'
+import {
+  formatDate,
+  getFirstWeekDayOfMonth,
+  getLastDayOfMonth,
+  getToday,
+} from 'utils/dates'
+
+const today = getToday()
 
 const useCalendar = () => {
   const { isAuthed } = useAuth()
   const { fetch } = useAttempts()
   const [data, setData] = useState(null)
-  const [year, setYear] = useState(() => new Date().getFullYear())
-  const [month, setMonth] = useState(() => new Date().getMonth() + 1)
+  const [month, setMonth] = useState(today.month)
+  const [year, setYear] = useState(today.year)
 
-  const lastDay = new Date(year, month, 0).getDate()
-  const firstDayOfWeek = new Date(year, month - 1, 1).getDay() || 7
+  const lastDay = useMemo(() => getLastDayOfMonth(year, month), [month, year])
+  const firstWeekDay = useMemo(() => getFirstWeekDayOfMonth(year, month), [month, year])
+  const monthTitle = useMemo(() => `${month}/${year}`, [month, year])
 
-  const monthTitle = `${month}/${year}`
-  const days = [...Array(lastDay).keys()].map(day =>
-    `${year}-${twoDigits(month)}-${twoDigits(day + 1)}`
-  )
-
-  const prevMonth = () => {
+  const prevMonth = useCallback(() => {
     if (month === 1) {
       setMonth(12)
       setYear(year - 1)
@@ -27,9 +30,9 @@ const useCalendar = () => {
       setMonth(month - 1)
     }
     setData(null)
-  }
+  }, [month, year])
 
-  const nextMonth = () => {
+  const nextMonth = useCallback(() => {
     if (month === 12) {
       setMonth(1)
       setYear(year + 1)
@@ -37,19 +40,24 @@ const useCalendar = () => {
       setMonth(month + 1)
     }
     setData(null)
-  }
+  }, [month, year])
 
   useEffect(() => {
     if (!isAuthed) return
     const initDate = new Date(year, month - 1)
     const finishDate = new Date(year, month, 1)
-    fetch(initDate, finishDate).then(data => setData(data))
-  }, [fetch, isAuthed, month, year])
+
+    const fillData = (data) => [...Array(lastDay).keys()].reduce((acc, day) => {
+      const key = formatDate({ year, month, day: day + 1 })
+      return Object.assign(acc, { [key]: data[key] || [] })
+    }, {})
+
+    fetch(initDate, finishDate).then(data => setData(fillData(data)))
+  }, [isAuthed, lastDay, month, year, fetch])
 
   return {
     data,
-    days,
-    firstDayOfWeek,
+    firstWeekDay,
     monthTitle,
     nextMonth,
     prevMonth,
