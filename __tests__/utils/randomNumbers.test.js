@@ -1,6 +1,6 @@
 import { getRandomNumbersFactory } from 'utils/randomNumbers'
 
-describe('getRandomNumbersFactory', () => {
+describe('utils/getRandomNumbersFactory', () => {
   test('should return a numbers factory', () => {
     const getNumbers = getRandomNumbersFactory()
     expect(typeof getNumbers).toBe('function')
